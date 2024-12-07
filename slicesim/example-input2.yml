@@ -1,0 +1,117 @@
+settings:
+  simulation_time: 100
+  num_clients: 300
+  limit_closest_base_stations: 7
+  statistics_params:
+    warmup_ratio: 0.05
+    cooldown_ratio: 0.05
+    x:
+      min: 0
+      max: 2000
+    y:
+      min: 0
+      max: 2000
+  logging: False
+  log_file: output.txt
+
+  plotting_params:
+    plotting: True
+    plot_save: True
+    plot_show: True
+    plot_file: output.png
+    plot_file_dpi: 300
+    scatter_size: 50
+
+slices:
+  iot:
+    delay_tolerance: 10
+    qos_class: 2
+    bandwidth_guaranteed: 100
+    bandwidth_max: 10000000
+    client_weight: 0.5
+    threshold: 0.8
+    usage_pattern:
+      distribution: randint
+      params:
+        - 4000000
+        - 800000000
+  data:
+    delay_tolerance: 2000
+    qos_class: 4
+    bandwidth_guaranteed: 1000
+    bandwidth_max: 50000000
+    client_weight: 0.5
+    threshold: 0.87
+    usage_pattern:
+      distribution: randint
+      params:
+        - 4000000
+        - 800000000
+
+base_stations:
+  - x: 250
+    y: 250
+    coverage: 500
+    capacity_bandwidth: 1000000
+    ratios:
+      iot: 0.4
+      data: 0.6
+  - x: 750
+    y: 750
+    coverage: 600
+    capacity_bandwidth: 1500000
+    ratios:
+      iot: 0.3
+      data: 0.7
+  - x: 1250
+    y: 1250
+    coverage: 700
+    capacity_bandwidth: 2000000
+    ratios:
+      iot: 0.2
+      data: 0.8
+  - x: 1750
+    y: 1750
+    coverage: 800
+    capacity_bandwidth: 2500000
+    ratios:
+      iot: 0.1
+      data: 0.9
+
+mobility_patterns:
+  normal_btw_0_1000:
+    distribution: normal
+    params:
+      - 0
+      - 1
+    client_weight: 0.5
+  basic:
+    distribution: randint
+    params:
+      - -1
+      - 1
+    client_weight: 0.5
+
+clients:
+  location:
+    x:
+      distribution: normal
+      params:
+        - 1000
+        - 600
+    y:
+      distribution: normal
+      params:
+        - 1000
+        - 600
+  usage:
+    distribution: randint
+    params:
+      - 0
+      - 100000
+  usage_frequency:
+    distribution: randint
+    params:
+      - 0
+      - 100000
+    divide_scale: 1000000
